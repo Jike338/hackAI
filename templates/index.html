@@ -3,14 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Web App</title>
+    <title>Chat Web App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
-    <div class="container">
-        <input type="text" id="userInput" placeholder="Enter your prompt">
-        <button onclick="processInput()">Submit</button>
-        <p id="result"></p>
+    <div class="chat-container">
+        <div id="chatbox" class="chatbox">
+            <!-- Chat messages will be appended here -->
+        </div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button onclick="processInput()">Send</button>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
