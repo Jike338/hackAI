@@ -5,6 +5,33 @@ document.getElementById("userInput").addEventListener("keypress", function(event
     }
 });
 
+function appendTableToChat(data, sender) {
+    const chatWindow = document.getElementById("chatWindow");
+    const messageBox = document.createElement("div");
+    messageBox.classList.add(sender);
+    
+    // Create a table element
+    const table = document.createElement("table");
+    
+    // Iterate over each row of the array
+    data.forEach(row => {
+        const tableRow = document.createElement("tr");
+        
+        // Iterate over each cell in the row
+        row.forEach(cell => {
+            const tableCell = document.createElement("td");
+            tableCell.innerText = cell;
+            tableRow.appendChild(tableCell);
+        });
+        
+        table.appendChild(tableRow);
+    });
+
+    messageBox.appendChild(table);
+    chatWindow.appendChild(messageBox);
+    chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the bottom
+}
+
 function processInput() {
     const userInput = document.getElementById("userInput").value;
     appendMessage(userInput, 'user');
@@ -19,9 +46,13 @@ function processInput() {
     })
     .then(response => response.json())
     .then(data => {
-        setTimeout(() => { // Delay the bot's response
-            appendMessage(data.result, 'bot');
-        }, 1000); // Delay by 1 second
+        setTimeout(() => { // Delay the bot's second response
+            if (Array.isArray(data.result2) && Array.isArray(data.result2[0])) {
+                appendTableToChat(data.result2, 'bot');
+            } else {
+                appendMessage(data.result2, 'bot');
+            }
+        }, 2000);
     })
     .catch(error => {
         console.error('Error:', error);

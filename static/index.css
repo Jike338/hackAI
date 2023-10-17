@@ -99,3 +99,18 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid white;
+}
+
+td {
+    padding: 5px;
+    text-align: left;
+}
